@@ -9,21 +9,36 @@ var rename = require('gulp-rename');
 var notify = require('gulp-notify');
 var minifycss = require('gulp-minify-css');
 var react = require('gulp-react');
+var babel = require('gulp-babel');
+var browserSync = require('browser-sync');
+var useref = require('gulp-useref');
 
 var path = {
-    HTML: 'app/index.html',
-    JS: ['app/scripts/**/*.js','app/scripts/*.js']
+    HTML: ['app/*.html'],
+    JS: ['app/scripts/**/*.js','app/scripts/*.js'],
+    CSS: ['app/styles/**/*.css','app/styles/*.css']
 };
 
-// Lint Task
+gulp.task('browser-sync', function() {
+    browserSync({
+        server: {
+            baseDir: "./dist/"
+        }
+    });
+});
+
+gulp.task('bs-reload', function () {
+      browserSync.reload();
+});
+
 gulp.task('lint', function() {
     return gulp.src('js/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
-// Compile Our Sass
+
 gulp.task('sass', function() {
-    return gulp.src('app/styles/scss/**/*.scss')
+    return gulp.src(path.CSS)
     .pipe(concat('application.css'))
     .pipe(sass())
     .pipe(rename({suffix: '.min'}))
@@ -31,25 +46,27 @@ gulp.task('sass', function() {
     .pipe(gulp.dest('dist/styles'))
     .pipe(notify({ message: 'sass & minify transformation done' }));
 });
-// Tranform JSX
-gulp.task('transform', function(){
+
+gulp.task('scripts', function(){
     return gulp.src(path.JS)
-            .pipe(react())
-            .pipe(gulp.dest('dist/scripts'));
-});
-// Concatenate & Minify JS
-gulp.task('scripts', function() {
-    return gulp.src('js/*.js')
-    .pipe(concat('all.js'))
-    .pipe(gulp.dest('dist'))
-    .pipe(rename('all.min.js'))
+    .pipe(concat('application.js'))
+    .pipe(babel())
+    .pipe(react())
+    .pipe(gulp.dest('dist/scripts/'))
+    .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
+    .pipe(gulp.dest('dist/scripts/'))
+    .pipe(browserSync.reload({stream:true}));
+});
+
+gulp.task('html', function(){
+    return gulp.src(path.HTML)
+    .pipe(useref())
     .pipe(gulp.dest('dist'));
 });
-// Watch Files For Changes
-gulp.task('watch', function() {
-    gulp.watch('js/*.js', ['lint', 'scripts']);
-    gulp.watch('scss/*.scss', ['sass']);
+
+gulp.task('default', ['browser-sync'], function(){
+    gulp.watch(path.CSS, ['styles']);
+    gulp.watch(path.JS, ['scripts']);
+    gulp.watch(path.HTML, ['html','bs-reload']);
 });
-// Default Task
-gulp.task('default', ['lint', 'sass', 'scripts', 'watch']);
