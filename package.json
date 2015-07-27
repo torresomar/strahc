@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/torresomar/strahc/issues"
   },
-  "homepage": "https://github.com/torresomar/strahc"
+  "homepage": "https://github.com/torresomar/strahc",
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  }
 }
