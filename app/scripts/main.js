@@ -1,6 +1,4 @@
-var react = require('react');
-console.log(react);
-console.log(react);
+var React = require('react');
 
 var liskov = React.createClass({
     render: function(){
