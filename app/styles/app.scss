@@ -1,0 +1,96 @@
+@import "bootstrap";
+@import url(http://fonts.googleapis.com/css?family=Titillium+Web:300);
+
+$main-color: #171A21;
+$subs-color: #3A606E;
+$header-color: #171A21;
+$charts-container-color: #F0F0F0;
+
+body,html{
+  height: 100%;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+/* Space out content a bit */
+body {
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+  border-bottom: 1px solid $header-color;
+  background: $header-color;
+  /* Make the masthead heading the same height as the navigation */
+  h3 {
+    color: #fff;
+    font-family: 'Titillium Web', sans-serif;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+  }
+}
+
+/* Custom page footer */
+.footer {
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+  p{
+    margin:0;
+  }
+}
+
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+// @media (min-width: 768px)
+.navbar-nav > li > a {
+  color: #fff;
+  padding: 10px 15px;
+  &:hover{
+    color: $main-color;
+  }
+}
+
+#react-strahc {
+  height: calc(100% - 62px);
+  .row{
+    height: 100%;
+  }
+}
+.charts-container{
+  padding: 15px;
+  height: 100%;
+}
+.chart-item{
+  background: #FF715B;
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 2px;
+  color: #fff;
+}
+//Charts
+.tick{
+  line{
+    stroke: rgb(0,0,0);
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+  }
+  .grid-delimiter{
+    stroke: rgb(223, 223, 223);
+  }
+}
