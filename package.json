@@ -25,10 +25,13 @@
     "d3": "^3.5.6"
   },
   "devDependencies": {
+    "array-differ": "^1.0.0",
+    "array-union": "^1.0.1",
     "browser-sync": "^2.8.0",
     "browserify": "^11.0.0",
     "browserify-shim": "^3.8.10",
     "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^2.3.1",
     "gulp-babel": "^5.1.0",
     "gulp-concat": "^2.6.0",
     "gulp-filter": "^3.0.0",
@@ -37,10 +40,13 @@
     "gulp-notify": "^2.2.0",
     "gulp-react": "^3.0.1",
     "gulp-rename": "^1.2.2",
+    "gulp-ruby-sass": "^1.0.5",
     "gulp-sass": "^2.0.4",
     "gulp-uglify": "^1.2.0",
     "gulp-useref": "^1.2.0",
+    "gulp-util": "^3.0.6",
     "reactify": "^1.1.1",
+    "streamfilter": "^1.0.1",
     "vinyl-source-stream": "^1.1.0"
   },
   "browserify": {
@@ -53,6 +59,9 @@
         }
       ]
     ]
+  },
+  "browser": {
+    "jquery": "./app/bower_components/jquery/dist/jquery.js"
   },
   "browserify-shim": {
     "jquery": "$"

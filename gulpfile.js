@@ -2,7 +2,7 @@
 var gulp = require('gulp');
 // Include Our Plugins
 var jshint = require('gulp-jshint');
-var sass = require('gulp-sass');
+var sass = require('gulp-ruby-sass');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
@@ -16,11 +16,16 @@ var source = require('vinyl-source-stream');
 var react = require('gulp-react');
 var reactify = require('reactify');
 var gulpFilter = require('gulp-filter');
+var autoprefixer = require('gulp-autoprefixer');
 
 var path = {
     HTML: ['app/*.html'],
     JS:   ['app/scripts/**/*.js','app/scripts/*.js'],
-    CSS:  ['app/styles/**/*.css','app/styles/*.css','app/styles/**/*.scss','app/styles/*.scss']
+    CSS:  ['app/styles/**/*.css',
+        'app/styles/*.css',
+        'app/styles/**/*.scss',
+        'app/styles/*.scss',
+    ]
 };
 
 gulp.task('browser-sync', function() {
@@ -42,24 +47,29 @@ gulp.task('lint', function() {
 });
 
 gulp.task('styles', function() {
-    var cssFilter = gulpFilter('app/bower_components/**/*.css');
-    return gulp.src(path.CSS)
-    .pipe(sass({
+    return sass('app/styles',{
         style: 'expanded',
         precision: 10,
         loadPath: ['app/bower_components']
-    }))
+    })
+    .pipe(autoprefixer('last 1 version'))
     .pipe(concat('application.css'))
-    // .pipe(rename({suffix: '.min'}))
-    // .pipe(minifycss())
+    .pipe(rename({suffix: '.min'}))
+    .pipe(minifycss())
     .pipe(gulp.dest('dist/styles'))
     .pipe(notify({ message: 'sass & minify transformation done' }));
 });
 
 gulp.task('html', function(){
     return gulp.src(path.HTML)
-    .pipe(useref())
     .pipe(gulp.dest('dist'));
+});
+
+gulp.task('bower', function(){
+    gulp.src('app/bower_components/**/*.js',{
+        base: 'app/bower_components'
+    })
+    .pipe(gulp.dest('dist/bower_components'));
 });
 
 var bundler = browserify({
@@ -82,7 +92,9 @@ function rebundle(){
 
 gulp.task('scripts', rebundle);
 
-gulp.task('default', ['browser-sync','styles','scripts','html'], function(){
+gulp.task('build', ['browser-sync','styles','scripts','html','bower']);
+
+gulp.task('default', ['build'] , function(){
     gulp.watch(path.CSS,  ['styles']);
     gulp.watch(path.JS,   ['scripts']);
     gulp.watch(path.HTML, ['html','bs-reload']);
