@@ -1,6 +1,6 @@
 var React = require('react');
 
-var liskov = React.createClass({
+var Liskov = React.createClass({
     render: function(){
         return(
             <div>
@@ -11,3 +11,5 @@ var liskov = React.createClass({
         );
     }
 });
+
+React.render(<Liskov/>, document.getElementById('react-strahc'));
