@@ -20,11 +20,15 @@ var autoprefixer = require('gulp-autoprefixer');
 
 var path = {
     HTML: ['app/*.html'],
-    JS:   ['app/scripts/**/*.js','app/scripts/*.js','index.js','charts/**/*.js'],
-    CSS:  ['app/styles/**/*.css',
-        'app/styles/*.css',
-        'app/styles/**/*.scss',
-        'app/styles/*.scss',
+    JS:   [ 'app/scripts/**/*.js',
+            'app/scripts/*.js',
+            'index.js',
+            'lib/*.js'
+    ],
+    CSS:  [ 'app/styles/**/*.css',
+            'app/styles/*.css',
+            'app/styles/**/*.scss',
+            'app/styles/*.scss',
     ]
 };
 
@@ -76,8 +80,8 @@ gulp.task('bower', function(){
 });
 
 var bundler = browserify({
-    entries: ['app/scripts/main.js','index.js'],
-    paths: ['./charts'],
+    entries: ['app/scripts/main.js'],
+    paths: ['lib'],
     debug: true,
     insertGlobals: true,
     cache: {},
@@ -85,7 +89,7 @@ var bundler = browserify({
     fullPaths: true
 });
 
-function rebundle(){
+function bundle(){
     return bundler.bundle()
     .pipe(source('application.js'))
     .pipe(gulp.dest('dist/scripts'))
@@ -94,7 +98,7 @@ function rebundle(){
     });
 }
 
-gulp.task('scripts', rebundle);
+gulp.task('scripts', bundle);
 
 gulp.task('build', ['browser-sync','styles','scripts','html','bower']);
 

@@ -1,6 +1,8 @@
 "use strict";
 var React = require('react');
-var strahc = require('./../../index');
+
+var BarChart = require('./../../lib/BarChart');
+
 var Liskov = React.createClass({
     render: function(){
         return(
@@ -9,6 +11,7 @@ var Liskov = React.createClass({
                 <h1>Hey Transform This</h1>
                 <h1>Hey Transform This</h1>
                 <h1>Hey Transform This</h1>
+                <BarChart/>
             </div>
         );
     }
