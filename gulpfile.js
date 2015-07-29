@@ -20,7 +20,7 @@ var autoprefixer = require('gulp-autoprefixer');
 
 var path = {
     HTML: ['app/*.html'],
-    JS:   ['app/scripts/**/*.js','app/scripts/*.js'],
+    JS:   ['app/scripts/**/*.js','app/scripts/*.js','index.js','charts/**/*.js'],
     CSS:  ['app/styles/**/*.css',
         'app/styles/*.css',
         'app/styles/**/*.scss',
@@ -62,6 +62,9 @@ gulp.task('styles', function() {
 
 gulp.task('html', function(){
     return gulp.src(path.HTML)
+    // .pipe(useref.assets())
+    // .pipe(useref.assets().restore())
+    // .pipe(useref())
     .pipe(gulp.dest('dist'));
 });
 
@@ -73,7 +76,8 @@ gulp.task('bower', function(){
 });
 
 var bundler = browserify({
-    entries: ['app/scripts/main.js'],
+    entries: ['app/scripts/main.js','index.js'],
+    paths: ['./charts'],
     debug: true,
     insertGlobals: true,
     cache: {},
