@@ -37,15 +37,19 @@ var Charts = React.createClass({
         });
     },
     render: function(){
+        var megaColors = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#e67e22", "#e74c3c", "#ecf0f1", "#95a5a6", "#f39c12", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"];
         return(
             <div className='col-sm-12'>
                 <div className='row'>
                     <div className='col-sm-6'>
                         <h4>Bar Chart</h4>
-                        <BarChart height={400} data={this.state.data}/>
+                        <BarChart
+                            height={400}
+                            colors={megaColors}
+                            data={this.state.data}/>
                         <hr/>
-                        <button onClick={this.changeData} className="btn btn-warning" type="submit">Button</button>
-                        <button onClick={this.emptyData} className="btn btn-danger" type="submit">Button</button>
+                        <button onClick={this.changeData} className="btn btn-warning" type="submit">Load Data</button>
+                        <button onClick={this.emptyData} className="btn btn-danger" type="submit">Remove Data</button>
                     </div>
                     <div className='col-sm-6'>
                         <h4>Using the component:</h4>
