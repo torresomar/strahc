@@ -4,15 +4,48 @@ var React = require('react');
 var BarChart = require('./../../lib/BarChart');
 
 var Charts = React.createClass({
+    getInitialState: function(){
+        return {
+            data: [],
+            value: 'value'
+        };
+    },
+    changeData: function(){
+        var data = [];
+        var size = 10;
+        while(size--){
+            data.push({
+                name: String.fromCharCode(97 + size),
+                date: randomDate(new Date(2012,0,1), new Date()),
+                value: getRandomInt(0, 100),
+                ratio: getRandomInt(0, 1000)
+            });
+        }
+        this.setState({
+            data: data
+        });
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        function randomDate(start, end) {
+            return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+        }  
+    },
+    emptyData: function(){
+        this.setState({
+            data: []
+        });
+    },
     render: function(){
         return(
             <div className='col-sm-12'>
                 <div className='row'>
                     <div className='col-sm-6'>
                         <h4>Bar Chart</h4>
-                        <BarChart height={400}/>
+                        <BarChart height={400} data={this.state.data}/>
                         <hr/>
-                        <button className="btn btn-warning" type="submit">Button</button>
+                        <button onClick={this.changeData} className="btn btn-warning" type="submit">Button</button>
+                        <button onClick={this.emptyData} className="btn btn-danger" type="submit">Button</button>
                     </div>
                     <div className='col-sm-6'>
                         <h4>Using the component:</h4>
