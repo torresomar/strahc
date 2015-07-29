@@ -23,7 +23,8 @@ var path = {
     JS:   [ 'app/scripts/**/*.js',
             'app/scripts/*.js',
             'index.js',
-            'lib/*.js'
+            'lib/*.js',
+            'lib/**/*.js',
     ],
     CSS:  [ 'app/styles/**/*.css',
             'app/styles/*.css',
