@@ -6,12 +6,8 @@ var BarChart = require('./../../lib/BarChart');
 var Liskov = React.createClass({
     render: function(){
         return(
-            <div>
-                <h1>Hey Transform This</h1>
-                <h1>Hey Transform This</h1>
-                <h1>Hey Transform This</h1>
-                <h1>Hey Transform This</h1>
-                <BarChart/>
+            <div className='col-sm-6'>
+                <BarChart height={400}/>
             </div>
         );
     }
