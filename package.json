@@ -71,7 +71,6 @@
   },
   "jest": {
     "scriptPreprocessor": "./preprocessor.js",
-    "testPathDirs": "./lib/__tests__",
     "unmockedModulePathPatterns": ["./node_modules/react"]
   }
 }
