@@ -4,7 +4,7 @@
   "description": "React.js and d3.js based components",
   "main": "lib/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "mocha --compilers js:babel/register --recursive"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
   "devDependencies": {
     "array-differ": "^1.0.0",
     "array-union": "^1.0.1",
+    "babel": "^5.8.19",
     "browser-sync": "^2.8.0",
     "browserify": "^11.0.0",
     "browserify-shim": "^3.8.10",
@@ -48,6 +49,9 @@
     "gulp-useref": "^1.2.0",
     "gulp-util": "^3.0.6",
     "jest-cli": "^0.4.17",
+    "jsdom": "^5.6.1",
+    "mocha": "^2.2.5",
+    "react-tools": "^0.13.3",
     "reactify": "^1.1.1",
     "streamfilter": "^1.0.1",
     "vinyl-source-stream": "^1.1.0"
@@ -71,6 +75,8 @@
   },
   "jest": {
     "scriptPreprocessor": "./preprocessor.js",
-    "unmockedModulePathPatterns": ["./node_modules/react"]
+    "unmockedModulePathPatterns": [
+      "./node_modules/react"
+    ]
   }
 }
