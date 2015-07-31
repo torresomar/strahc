@@ -42,9 +42,10 @@ var Charts = React.createClass({
             <div className='col-sm-12'>
                 <div className='row'>
                     <div className='col-sm-6'>
-                        <h4>Hola CHris</h4>
+                        <h4>Bar Chart</h4>
                         <BarChart
                             height={400}
+                            width={930}
                             colors={megaColors}
                             data={this.state.data}/>
                         <hr/>
