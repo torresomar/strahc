@@ -14,19 +14,18 @@ describe('- BarChart component', function(){
         ];
         var megaColors = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#e67e22", "#e74c3c", "#ecf0f1", "#95a5a6", "#f39c12", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"];
         var renderedComponent = TestUtils.renderIntoDocument(
-            <div style={{width: 600, height: 400}}>
-                <BarChart
-                    height={400}
-                    width={600}
-                    colors={megaColors}
-                    data={data}/>
-            </div>
+            <BarChart
+                height={400}
+                width={600}
+                colors={megaColors}
+                data={data}/>
         );
         var chart = TestUtils.findRenderedDOMComponentWithTag(
             renderedComponent,
             'svg'
         );
         this.chart = chart.getDOMNode();
+        this.component = renderedComponent;
     });
     it('<BarChart/> should be of class "strahc-svg"', function() {
         assert(this.chart.getAttribute('class') === 'strahc-svg');
@@ -46,7 +45,38 @@ describe('- BarChart component', function(){
     });
     it('<BarChart/> should have rects', function(){
         var rects = d3.select(this.chart)
-        .select('.bars-group');
-        assert(!rects.empty() || rects.size() === 4, 'Faulty rects');
+        .selectAll('.bars-group');
+        assert(!rects.empty() && rects.size() === 4, 'Faulty rects');
+    });
+    it('<BarChart/> rects should have a top padding based on delta', function(){
+        var rects = d3.select(this.chart)
+        .selectAll('.strahc-grouping rect');
+        // TODO Fix this test
+        assert(true);
+    });
+    it('<BarChart/> should update when data is removed', function(){
+        this.component.setState({
+            data: []
+        });
+        var rects = d3.select(this.chart)
+        .selectAll('.bars-group');
+        assert(rects.empty());
+    });
+    it('<BarChart/> should update when data is updated', function(){
+        var data = [
+            {name: 'Q',value: 104},
+            {name: 'W',value: 140},
+            {name: 'E',value: 80},
+            {name: 'R',value: 127},
+            {name: 'T',value: 130},
+            {name: 'Y',value: 190}
+        ];
+        this.component.setState({
+            data: data
+        },function(){
+            var rects = d3.select(this.chart)
+            .selectAll('.bars-group');
+            assert(rects.size() === 5);
+        });
     });
 });

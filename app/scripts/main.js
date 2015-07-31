@@ -12,7 +12,7 @@ var Charts = React.createClass({
     },
     changeData: function(){
         var data = [];
-        var size = 10;
+        var size = 20;
         while(size--){
             data.push({
                 name: String.fromCharCode(97 + size),
@@ -42,7 +42,7 @@ var Charts = React.createClass({
             <div className='col-sm-12'>
                 <div className='row'>
                     <div className='col-sm-6'>
-                        <h4>Bar Chart</h4>
+                        <h4>Hola CHris</h4>
                         <BarChart
                             height={400}
                             colors={megaColors}
