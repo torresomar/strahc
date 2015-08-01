@@ -54,29 +54,38 @@ describe('- BarChart component', function(){
         // TODO Fix this test
         assert(true);
     });
-    it('<BarChart/> should update when data is removed', function(){
+    it('<BarChart/> should have no bars when data is removed', function(){
+        var chart = this.chart;
         this.component.setState({
             data: []
-        });
-        var rects = d3.select(this.chart)
-        .selectAll('.bars-group');
-        assert(rects.empty());
-    });
-    it('<BarChart/> should update when data is updated', function(){
-        var data = [
-            {name: 'Q',value: 104},
-            {name: 'W',value: 140},
-            {name: 'E',value: 80},
-            {name: 'R',value: 127},
-            {name: 'T',value: 130},
-            {name: 'Y',value: 190}
-        ];
-        this.component.setState({
-            data: data
-        },function(){
-            var rects = d3.select(this.chart)
+        }, function(){
+            var rects = d3.select(chart)
             .selectAll('.bars-group');
-            assert(rects.size() === 5);
+            console.log(rects.size());
+            assert(rects.empty());
         });
     });
+    it('<BarChart/> should have n-bars when data is updated', function(done){
+        var chart = this.chart;
+        this.component.setState({
+            data: [
+                {name: 'Q',value: 104},
+                {name: 'W',value: 140},
+                {name: 'E',value: 80},
+                {name: 'R',value: 127},
+                {name: 'T',value: 130},
+                {name: 'Y',value: 190}
+            ]
+        },function(){
+            var rects = d3.select(chart)
+            .selectAll('.bars-group');
+            console.log(rects.size());
+            assert(rects.size() === 6);
+        });
+    });
+    it('<BarChart/> should have a grid in Y');
+    it('<BarChart/> should have a grid in Y with equal Y axis ticks');
+    it('<BarChart/> should display tooltip on mouseover rect');
+    it('<BarChart/> should remove tooltip on mouseout rect');
+    it('<BarChart/> should resize');
 });
