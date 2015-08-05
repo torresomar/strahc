@@ -94,6 +94,27 @@ body {
     stroke: rgb(223, 223, 223);
   }
 }
+.strahc-tooltip{
+  min-width: 200px;
+  max-width: 200px;
+  min-height: 100px;
+  max-height: 100px;
+  padding: 10px;
+  position: absolute;
+  border: 1px #171A21 solid;
+  display: none;
+  background: #fff;
+  border-radius: 3px;
+  -webkit-box-shadow: 0px 0px 20px -10px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 20px -10px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 20px -10px rgba(0,0,0,0.75);
+}
+.strahc-y-break{
+  stroke: #171A21;
+  stroke-width: 1;
+  fill: none;
+  shape-rendering: crispEdges;
+}
 .btn{
   border-radius: 0;
 }

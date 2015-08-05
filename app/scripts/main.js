@@ -14,11 +14,15 @@ var Charts = React.createClass({
         var data = [];
         var size = 20;
         while(size--){
+            var neg = -1;
+            if(size % 2 === 0){
+                neg = 1;
+            }
             data.push({
                 name: String.fromCharCode(97 + size),
                 date: randomDate(new Date(2012,0,1), new Date()),
-                value: getRandomInt(0, 100),
-                ratio: getRandomInt(0, 1000)
+                value: getRandomInt(0, 100) * neg,
+                ratio: getRandomInt(0, 1000) * neg
             });
         }
         this.setState({
