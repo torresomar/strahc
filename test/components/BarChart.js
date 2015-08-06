@@ -1,9 +1,9 @@
+require('./../setup.js');
 var React = require('react/addons'),
     assert = require('assert'),
     BarChart = require('../../lib/BarChart'),
     TestUtils = React.addons.TestUtils,
     d3 = require('d3');
-
 describe('- BarChart component', function(){
     before('render and locate element', function() {
         var data = [
@@ -13,22 +13,79 @@ describe('- BarChart component', function(){
             {name: 'D',value: 100}
         ];
         var megaColors = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#e67e22", "#e74c3c", "#ecf0f1", "#95a5a6", "#f39c12", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"];
+        var MockChart = React.createClass({
+            getInitialState: function(){
+                return {
+                    data: [],
+                    value: 'value'
+                };
+            },
+            getData: function(num){
+                var data = [];
+                var size = num;
+                while(size--){
+                    var neg = -1;
+                    if(size % 2 === 0){
+                        neg = 1;
+                    }
+                    data.push({
+                        name: String.fromCharCode(97 + size),
+                        date: randomDate(new Date(2012,0,1), new Date()),
+                        value: getRandomInt(0, 100) * neg,
+                        ratio: getRandomInt(0, 1000) * neg
+                    });
+                }
+                function getRandomInt(min, max) {
+                    return Math.floor(Math.random() * (max - min + 1)) + min;
+                }
+                function randomDate(start, end) {
+                    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+                }  
+                return data;
+            },
+            emptyData: function(){
+                this.setState({
+                    data: []
+                });
+            },
+            render: function(){
+                return (
+                    <BarChart height={400}
+                        width={600}
+                        colors={megaColors}
+                        data={this.state.data}/>
+                );
+            }
+        });
         var renderedComponent = TestUtils.renderIntoDocument(
-            <BarChart
-                height={400}
-                width={600}
-                colors={megaColors}
-                data={data}/>
+            <MockChart/>
         );
         var chart = TestUtils.findRenderedDOMComponentWithTag(
             renderedComponent,
-            'svg'
+            'div'
         );
         this.chart = chart.getDOMNode();
         this.component = renderedComponent;
     });
-    it('<BarChart/> should be of class "strahc-svg"', function() {
-        assert(this.chart.getAttribute('class') === 'strahc-svg');
+    it('<BarChart/> should not render chart if no data is available', function() {
+        assert.equal(this.chart.getAttribute('class'),'strahc-pending-data');
+    });
+    it('<BarChart/> should have an svg when data is available', function(done){
+        var newData = this.component.getData(10);
+        console.log(this.chart.getAttribute('class'));
+        this.component.setState({
+           data: newData 
+        },function(){
+            var chart = TestUtils.findRenderedDOMComponentWithTag(
+                this.component,
+                'svg'
+            );
+            console.log(chart);
+            var rects = d3.select(this.chart)
+            .selectAll('.bars-group');
+            console.log(rects.size());
+            console.log('finished');
+        });
     });
     it('<BarChart/> should have an xAxis', function(){
         var axisIsEmpty = d3.select(this.chart).select('.x-axis').empty();
