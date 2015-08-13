@@ -115,6 +115,11 @@ body {
   fill: none;
   shape-rendering: crispEdges;
 }
+.strahc-tooltip{
+  h1,h2,h3,h4,h5,hr{
+    margin:0;
+  }
+}
 .btn{
   border-radius: 0;
 }
