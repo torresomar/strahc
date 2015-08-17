@@ -57,7 +57,7 @@ var Charts = React.createClass({
         return(
             <div className='col-sm-12'>
                 <div className='row'>
-                    <div className='col-sm-2'>
+                    <div className='col-sm-6'>
                         <h4>Bar Chart</h4>
                         <BarChart
                             height={400}
