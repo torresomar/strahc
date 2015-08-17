@@ -1,5 +1,6 @@
 "use strict";
 var React = require('react');
+var d3 = require('d3');
 
 var BarChart = require('./../../lib/BarChart');
 
@@ -12,7 +13,7 @@ var Charts = React.createClass({
     },
     changeData: function(){
         var data = [];
-        var size = 20;
+        var size = 50;
         while(size--){
             var neg = -1;
             if(size % 2 === 0){
@@ -20,7 +21,7 @@ var Charts = React.createClass({
             }
             data.push({
                 name: String.fromCharCode(97 + size),
-                date: randomDate(new Date(2012,0,1), new Date()),
+                date: new Date(2012,1,size),
                 value: getRandomInt(0, 100) * neg,
                 ratio: getRandomInt(0, 1000) * neg
             });
@@ -42,15 +43,29 @@ var Charts = React.createClass({
     },
     render: function(){
         var megaColors = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#e67e22", "#e74c3c", "#ecf0f1", "#95a5a6", "#f39c12", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"];
+        var xAxis = {
+            rotate: -20,
+            anchor: 'end',
+            // format: d3.time.format("%Y-%m-%d")
+        };
+        var margin = {
+            top: 20,
+            bottom: 60,
+            left: 50,
+            right: 20
+        }
         return(
             <div className='col-sm-12'>
                 <div className='row'>
-                    <div className='col-sm-6'>
+                    <div className='col-sm-4'>
                         <h4>Bar Chart</h4>
                         <BarChart
                             height={400}
-                            width={930}
+                            color={'#ec971f'}
                             colors={megaColors}
+                            xAxis={xAxis}
+                            margin={margin}
+                            valueKey='name'
                             data={this.state.data}/>
                         <hr/>
                         <button onClick={this.changeData} className="btn btn-warning" type="submit">Load Data</button>

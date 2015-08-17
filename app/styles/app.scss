@@ -95,10 +95,11 @@ body {
   }
 }
 .strahc-tooltip{
+  h1,h2,h3,h4,h5,hr{
+    margin:0;
+  }
   min-width: 200px;
-  max-width: 200px;
-  min-height: 100px;
-  max-height: 100px;
+  min-height: 50px;
   padding: 10px;
   position: absolute;
   border: 1px #171A21 solid;
@@ -115,10 +116,16 @@ body {
   fill: none;
   shape-rendering: crispEdges;
 }
-.strahc-tooltip{
-  h1,h2,h3,h4,h5,hr{
-    margin:0;
-  }
+.strahc-half{
+  width: 50%;
+  float: left;
+}
+.strahc-circle{
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  margin: 4px;
+  float: left;
 }
 .btn{
   border-radius: 0;
