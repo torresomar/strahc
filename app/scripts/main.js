@@ -13,7 +13,7 @@ var Charts = React.createClass({
     },
     changeData: function(){
         var data = [];
-        var size = 50;
+        var size = 200;
         while(size--){
             var neg = -1;
             if(size % 2 === 0){
