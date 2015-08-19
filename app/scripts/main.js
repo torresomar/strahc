@@ -3,6 +3,7 @@ var React = require('react');
 var d3 = require('d3');
 
 var BarChart = require('./../../lib/BarChart');
+var DonutChart = require('./../../lib/DonutChart');
 
 var Charts = React.createClass({
     getInitialState: function(){
@@ -13,14 +14,15 @@ var Charts = React.createClass({
     },
     changeData: function(){
         var data = [];
-        var size = 1000;
+        var size = 30;
         while(size--){
-            var neg = -1;
-            if(size % 2 === 0){
-                neg = 1;
-            }
+            // var neg = -1;
+            var neg = getRandomInt(-1,1);
+            // if(size % 2 === 0){
+            //     neg = 1;
+            // }
             data.push({
-                name: String.fromCharCode(97 + size),
+                name: size + '',
                 date: new Date(2012,1,size),
                 value: getRandomInt(0, 100) * neg,
                 ratio: getRandomInt(0, 1000) * neg
@@ -64,7 +66,7 @@ var Charts = React.createClass({
                             color={'#ec971f'}
                             xAxis={xAxis}
                             margin={margin}
-                            divisions={[0,45,-30]}
+                            divisions={[0,10,20,30,40,50,-10,-20,-30,-40,-50]}
                             valueKey='name'
                             data={this.state.data}/>
                         <hr/>
@@ -73,7 +75,7 @@ var Charts = React.createClass({
                     </div>
                     <div className='col-sm-6'>
                         <h4>Using the component:</h4>
-                        <code>
+                        <pre>
                             &lt;BarChart
                                 height=&#123;400&#125;
                                 color=&#123;'#ec971f'&#125;
@@ -82,7 +84,7 @@ var Charts = React.createClass({
                                 divisions=&#123;[0,45,-30]&#125;
                                 valueKey='name'
                                 data=&#123;data&#125;/&gt;
-                        </code>
+                        </pre>
                         <p>Whenever this code is run, it recomputes the data join and maintains the desired correspondence between elements and data. If the new dataset is smaller than the old one, the surplus elements end up in the <i>exit</i> selection and get removed. If the new dataset is larger, the surplus data ends up in the <i>enter</i> selection and new nodes are added. If the new dataset is exactly the same size, then all the elements are simply updated with new positions, and no elements are added or removed.</p>
                         <p>Thinking with joins means your code is more <i>declarative</i>: you handle these three states without any branching (<code class="javascript"><span class="keyword">if</span></code>) or iteration (<code class="javascript"><span class="keyword">for</span></code>). Instead you describe how elements should correspond to data. If a given <i>enter</i>, <i>update</i> or <i>exit</i> selection happens to be empty, the corresponding code is a no-op.</p>
                         <p>Joins also let you target operations to specific states, if needed. For example, you can set constant attributes (such as the circle’s radius, defined by the <code class="javascript"><span class="string">"r"</span></code> attribute) on enter rather than update. By reselecting elements and minimizing DOM changes, you vastly improve rendering performance! Similarly, you can target animated transitions to specific states. For example, for entering circles to expand-in:</p>
