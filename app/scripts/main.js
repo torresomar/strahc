@@ -89,12 +89,15 @@ var Charts = React.createClass({
                 </div>
                 <hr/>
                 <div className='row'>
-                    <div className='col-sm-6'>
+                    <div className='col-sm-9'>
                         <FillerHTML/>
                     </div>
-                    <div className='col-sm-6'>
+                    <div className='col-sm-3'>
                         <h4>Donut Chart</h4>
-                        <DonutChart data={donutData}/>
+                        <DonutChart
+                            thickness={40}
+                            tooltip={false}
+                            data={donutData}/>
                     </div>
                 </div>
             </div>
