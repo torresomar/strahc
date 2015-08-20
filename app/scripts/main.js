@@ -51,7 +51,21 @@ var Charts = React.createClass({
             bottom: 60,
             left: 50,
             right: 20
-        }
+        };
+        var donutData = [
+            {
+                name: 'Lucia',
+                value: 205
+            },
+            {
+                name: 'Christian',
+                value: 204
+            },
+            {
+                name: 'Luis',
+                value: 250
+            }
+        ];
         return(
             <div className='col-sm-12'>
                 <div className='row'>
@@ -80,7 +94,7 @@ var Charts = React.createClass({
                     </div>
                     <div className='col-sm-6'>
                         <h4>Donut Chart</h4>
-                        <DonutChart/>
+                        <DonutChart data={donutData}/>
                     </div>
                 </div>
             </div>
