@@ -39,6 +39,20 @@ var Charts = React.createClass({
             data: []
         });
     },
+    exportToPNG: function(){
+        canvg('canvas', $('#bar-chart-strahc').html());
+        // the canvas calls to output a png
+        var canvas = document.getElementById("canvas");
+        var img = canvas.toDataURL("image/png");
+        var swapped = img.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+        var element = document.createElement('a');
+        element.setAttribute('href', swapped);
+        element.setAttribute('download', 'chart.png');
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+    },
     render: function(){
         var megaColors = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#e67e22", "#e74c3c", "#ecf0f1", "#95a5a6", "#f39c12", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"];
         var xAxis = {
@@ -69,19 +83,20 @@ var Charts = React.createClass({
         return(
             <div className='col-sm-12'>
                 <div className='row'>
-                    <div className='col-sm-6'>
+                    <div className='col-sm-6' id='test'>
                         <h4>Bar Chart</h4>
                         <BarChart
+                            id='bar-chart-strahc'
                             height={400}
                             color={'#ec971f'}
                             xAxis={xAxis}
                             margin={margin}
-                            divisions={[0,10,20,30,40,50,-10,-20,-30,-40,-50]}
                             valueKey='name'
                             data={this.state.data}/>
                         <hr/>
                         <button onClick={this.changeData} className="btn btn-warning" type="submit">Load Data</button>
                         <button onClick={this.emptyData} className="btn btn-danger" type="submit">Remove Data</button>
+                        <button onClick={this.exportToPNG} className="btn btn-success" type="submit">Export</button>
                     </div>
                     <div className='col-sm-6'>
                         <FillerHTML/>
