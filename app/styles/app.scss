@@ -124,8 +124,11 @@ body {
   width: auto;
   position: absolute;
   display: none;
-  padding: 10px;
-  padding-bottom: 6px;
+  padding: 7px;
+  .tooltip-title {
+    margin: 0;
+    margin-bottom: 10px;
+  }
   .color-div {
     border-radius: 50%; 
     display: inline-block;
