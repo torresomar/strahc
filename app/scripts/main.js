@@ -40,14 +40,17 @@ var Charts = React.createClass({
         });
     },
     exportToPNG: function(){
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
         canvg('canvas', $('#bar-chart-strahc').html());
         // the canvas calls to output a png
-        var canvas = document.getElementById("canvas");
-        var img = canvas.toDataURL("image/png");
+        var img = canvas.toDataURL("image/jpeg");
         var swapped = img.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
         var element = document.createElement('a');
         element.setAttribute('href', swapped);
-        element.setAttribute('download', 'chart.png');
+        element.setAttribute('download', 'chart.jpeg');
         element.style.display = 'none';
         document.body.appendChild(element);
         element.click();
@@ -55,9 +58,11 @@ var Charts = React.createClass({
     },
     legendFormatter: function(d){
         var strBuffer = '';
-        strBuffer += '<h4>' + d.name + '</h4>';
+        strBuffer += '<h4>' + d.data.name + '</h4>';
         strBuffer += '<hr/>';
-        strBuffer += '<h4>' + d.value + '</h4>';
+        strBuffer += '<h4>' + d.data.value + '</h4>';
+        strBuffer += '<h5>' + 'I can show any data' + '</h5>';
+        strBuffer += '<p style="font-size:10px">' + 'The missing elements are added to the SVG container by calling selection.append on the enter selection. This appends a new circle for each data point.' + '</p>';
         return strBuffer;
     },
     render: function(){
@@ -73,10 +78,15 @@ var Charts = React.createClass({
             left: 50,
             right: 20
         };
+        var donutColors = { 
+            'Lucia':        '#d94801',
+            'Christian':    '#a63603',
+            'Luis':         '#7f2704'
+        };
         var donutData = [
             {
                 name: 'Lucia',
-                value: 205
+                value: 25
             },
             {
                 name: 'Christian',
@@ -84,13 +94,13 @@ var Charts = React.createClass({
             },
             {
                 name: 'Luis',
-                value: 250
+                value: 20
             }
         ];
         return(
             <div className='col-sm-12'>
                 <div className='row'>
-                    <div className='col-sm-6' id='test'>
+                    <div className='col-sm-6' id='test' style={{background: '#fff'}}>
                         <h4>Bar Chart</h4>
                         <BarChart
                             id='bar-chart-strahc'
@@ -117,10 +127,11 @@ var Charts = React.createClass({
                     <div className='col-sm-3'>
                         <h4>Donut Chart</h4>
                         <DonutChart
-                            thickness={40}
+                            thickness={150}
                             tooltip={false}
                             data={donutData}
-                            legendFormatter={this.strBuffer}
+                            colors={donutColors}
+                            legendFormatter={this.legendFormatter}
                         />
                     </div>
                 </div>

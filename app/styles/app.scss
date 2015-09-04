@@ -136,6 +136,12 @@ body {
 .strahc-donut-legend{
   text-align: center;
 }
+.strahc-component{
+  background: #fff;
+  svg{
+    background-color: #fff;
+  }
+}
 .btn{
   border-radius: 0;
 }
