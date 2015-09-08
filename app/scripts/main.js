@@ -9,8 +9,44 @@ var Charts = React.createClass({
     getInitialState: function(){
         return {
             data: [],
+            donutData: [],
             value: 'value'
         };
+    },
+    changeDonutData: function(){
+        var donutData = [
+            {
+                name: 'Lucia',
+                value: getRandomInt(1,200)
+            },
+            {
+                name: 'Christian',
+                value: getRandomInt(1,200)
+            },
+            {
+                name: 'Luis',
+                value: getRandomInt(1,200)
+            }
+        ];
+        var sample = getRandomInt(1,50);
+        console.log(sample);
+        if(sample % 2 === 0){
+            donutData.push({
+                name: 'Miguel',
+                value: getRandomInt(1,200)
+            });
+        }
+        this.setState({
+            donutData: donutData
+        });
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+    },
+    removeDonutData: function(){
+        this.setState({
+            donutData: []
+        });
     },
     changeData: function(){
         var data = [];
@@ -81,7 +117,8 @@ var Charts = React.createClass({
         var donutColors = { 
             'Lucia':        '#d94801',
             'Christian':    '#a63603',
-            'Luis':         '#7f2704'
+            'Luis':         '#7f2704',
+            'Miguel':       '#FF7835'
         };
         var donutData = [
             {
@@ -113,7 +150,6 @@ var Charts = React.createClass({
                         <hr/>
                         <button onClick={this.changeData} className="btn btn-warning" type="submit">Load Data</button>
                         <button onClick={this.emptyData} className="btn btn-danger" type="submit">Remove Data</button>
-                        <button onClick={this.exportToPNG} className="btn btn-success" type="submit">Export</button>
                     </div>
                     <div className='col-sm-6'>
                         <FillerHTML/>
@@ -127,12 +163,14 @@ var Charts = React.createClass({
                     <div className='col-sm-3'>
                         <h4>Donut Chart</h4>
                         <DonutChart
-                            thickness={150}
+                            thickness={25}
                             tooltip={false}
-                            data={donutData}
+                            data={this.state.donutData}
                             colors={donutColors}
                             legendFormatter={this.legendFormatter}
                         />
+                        <button onClick={this.changeDonutData} className="btn btn-warning" type="submit">Load Data</button>
+                        <button onClick={this.removeDonutData} className="btn btn-danger" type="submit">Remove Data</button>
                     </div>
                 </div>
             </div>
