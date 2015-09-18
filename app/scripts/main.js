@@ -1,13 +1,13 @@
 "use strict";
-var React =                 require('react');
-var d3 =                    require('d3');
+var React                   = require('react');
+var d3                      = require('d3');
 
-var BarChart = require('./../../lib/BarChart');
-var DonutChart = require('./../../lib/DonutChart');
-var BarChart =              require('./../../lib/BarChart');
-var LineChart =             require('./../../lib/LineChart');
-var HorizontalBarChart =    require('./../../lib/HorizontalBarChart');
-var StackedAreaChart =      require('./../../lib/StackedAreaChart');
+var BarChart                = require('./../../lib/BarChart');
+var DonutChart              = require('./../../lib/DonutChart');
+var BarChart                = require('./../../lib/BarChart');
+var LineChart               = require('./../../lib/LineChart');
+var HorizontalBarChart      = require('./../../lib/HorizontalBarChart');
+var StackedAreaChart        = require('./../../lib/StackedAreaChart');
 
 var Charts = React.createClass({
     getInitialState: function(){
@@ -166,33 +166,6 @@ var Charts = React.createClass({
         ];
         return(
             <div className='col-sm-12'>
-                {/*
-
-                <div className='row'>
-                    <div className='col-sm-6' id='test' style={{background: '#fff'}}>
-                        <h4>Bar Chart</h4>
-                        <BarChart
-<<<<<<< HEAD
-                            id='bar-chart-strahc'
-=======
-                            scale='linear'
->>>>>>> 83573530c53fa39b0ba4175cc281109c1d3cdbca
-                            height={400}
-                            color={'#ec971f'}
-                            colors={megaColors}
-                            xAxis={xAxis}
-                            margin={margin}
-                            valueKey='name'
-                            data={this.state.dataBar}/>
-                        <hr/>
-                        <button onClick={this.changeData} className="btn btn-warning" type="submit">Load Data</button>
-                        <button onClick={this.emptyData} className="btn btn-danger" type="submit">Remove Data</button>
-                    </div>
-                    <div className='col-sm-6'>
-                        <FillerHTML/>
-                    </div>
-                </div>
-                <hr/>
                 <div className='row'>
                     <div className='col-sm-9'>
                         <FillerHTML/>
@@ -204,13 +177,11 @@ var Charts = React.createClass({
                             tooltip={false}
                             data={this.state.donutData}
                             colors={donutColors}
-                            legendFormatter={this.legendFormatter}
-                        />
+                            legendFormatter={this.legendFormatter}/>
                         <button onClick={this.changeDonutData} className="btn btn-warning" type="submit">Load Data</button>
                         <button onClick={this.removeDonutData} className="btn btn-danger" type="submit">Remove Data</button>
                     </div>
                 </div>
-*/}
                 <div className='row'>
                     <div className='col-sm-6'>
                         <h4>Bar Chart</h4>
