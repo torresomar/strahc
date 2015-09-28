@@ -33,7 +33,6 @@ var Charts = React.createClass({
             }
         ];
         var sample = getRandomInt(1,50);
-        console.log(sample);
         if(sample % 2 === 0){
             donutData.push({
                 name: 'Miguel',
